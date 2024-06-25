@@ -14,4 +14,10 @@ public interface BrandService extends IService<Brand>{
     Brand getDetail(Long id);
 
     boolean add(Brand brand);
+
+    boolean del(Long id);
+
+    boolean updateData(Brand brand);
+
+    List<Brand> getAll();
 }

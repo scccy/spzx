@@ -29,4 +29,19 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     public boolean add(Brand brand) {
         return this.save(brand);
     }
+
+    @Override
+    public boolean del(Long id) {
+        return this.removeById(id);
+    }
+
+    @Override
+    public boolean updateData(Brand brand) {
+        return this.updateData(brand);
+    }
+
+    @Override
+    public List<Brand> getAll() {
+        return this.list();
+    }
 }

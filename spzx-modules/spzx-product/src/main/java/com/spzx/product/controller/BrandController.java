@@ -9,6 +9,7 @@ import com.spzx.product.service.BrandService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import org.aspectj.weaver.loadtime.Aj;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,14 +30,35 @@ public class BrandController extends BaseController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "查看详情")
     public Brand getDetail(@PathVariable("id")Long id ){
         return brandService.getDetail(id);
     }
 
-    @PutMapping()
+    @PostMapping()
+    @Operation(summary = "新增")
     public AjaxResult add(@RequestBody Brand brand){
 //       获取当前登入用户的信息,并且赋予创建人信息
         brand.setCreateBy(SecurityUtils.getUsername());
         return toAjax(brandService.add(brand));
     }
+    @DeleteMapping()
+    @Operation(summary = "删除")
+    public AjaxResult del(@PathVariable("id")Long id ){
+        return toAjax(brandService.del(id));
+    }
+
+    @PutMapping
+    @Operation(summary = "修改")
+    public AjaxResult updateData(@RequestBody Brand brand){
+        brand.setUpdateBy(SecurityUtils.getUsername());
+        return toAjax(brandService.updateData(brand));
+    }
+
+    @GetMapping("/getBrandAll")
+    @Operation(summary = "获取所有数据")
+    public AjaxResult getBrandAll(){
+        return success(brandService.getAll());
+    }
+
 }
