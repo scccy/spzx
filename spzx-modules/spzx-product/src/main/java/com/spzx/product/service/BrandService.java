@@ -15,7 +15,7 @@ public interface BrandService extends IService<Brand>{
 
     boolean add(Brand brand);
 
-    boolean del(Long id);
+    boolean del(List<Long> id);
 
     boolean updateData(Brand brand);
 

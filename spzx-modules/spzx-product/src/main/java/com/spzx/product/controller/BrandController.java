@@ -44,8 +44,8 @@ public class BrandController extends BaseController {
     }
     @DeleteMapping()
     @Operation(summary = "删除")
-    public AjaxResult del(@PathVariable("id")Long id ){
-        return toAjax(brandService.del(id));
+    public AjaxResult del(@PathVariable("id") List<Long> idList ){
+        return toAjax(brandService.del(idList));
     }
 
     @PutMapping

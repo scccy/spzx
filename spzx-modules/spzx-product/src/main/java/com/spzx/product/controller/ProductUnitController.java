@@ -21,10 +21,9 @@ public class ProductUnitController extends BaseController {
 
     @Operation(summary = "分页信息")
     @GetMapping("/list")
-    public TableDataInfo getPageList(Integer pageNum, Integer pageSize, ProductUnit ProductUnit) {
+    public TableDataInfo getPageList(Integer pageSize, Integer pageNum, ProductUnit ProductUnit) {
         Page<ProductUnit> productUnitPage = new Page<>(pageSize,pageNum);
         IPage<ProductUnit> iPage= productUnitService.getPageList(productUnitPage,ProductUnit);
-
         return getDataTable(iPage);
     }
 
