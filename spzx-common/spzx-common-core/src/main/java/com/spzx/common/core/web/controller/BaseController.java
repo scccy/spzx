@@ -1,18 +1,20 @@
 package com.spzx.common.core.web.controller;
 
-import java.beans.PropertyEditorSupport;
-import java.util.Date;
-import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.pagehelper.PageInfo;
 import com.spzx.common.core.constant.HttpStatus;
 import com.spzx.common.core.utils.DateUtils;
 import com.spzx.common.core.utils.PageUtils;
 import com.spzx.common.core.web.domain.AjaxResult;
 import com.spzx.common.core.web.page.TableDataInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+
+import java.beans.PropertyEditorSupport;
+import java.util.Date;
+import java.util.List;
 
 /**
  * web层通用数据处理
@@ -67,6 +69,17 @@ public class BaseController
         rspData.setRows(list);
         rspData.setMsg("查询成功");
         rspData.setTotal(new PageInfo(list).getTotal());
+        return rspData;
+    }
+
+//    mybatie-plus 版本的分装
+    protected TableDataInfo getDataTable(IPage<?> ipage)
+    {
+        TableDataInfo rspData = new TableDataInfo();
+        rspData.setCode(HttpStatus.SUCCESS);
+        rspData.setRows(ipage.getRecords());
+        rspData.setMsg("查询成功");
+        rspData.setTotal(ipage.getTotal());
         return rspData;
     }
 
